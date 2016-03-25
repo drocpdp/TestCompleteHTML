@@ -5,9 +5,6 @@ from login_object import LoginObject
 
 class APIBase(LoginObject):
 
-	def __init__(self):
-		self.set_login()
-
 	@property
 	def protocol(self):
 	    return "https"
@@ -52,7 +49,3 @@ class APIBase(LoginObject):
 			print test_case['folder_name']
 		for test_case in results:
 			print test_case.keys()
-
-
-if __name__ == "__main__":
-	APIBase().test_request()

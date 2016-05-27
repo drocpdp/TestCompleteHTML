@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from api_base import APIBase
 
 class Implementation(APIBase):
@@ -16,17 +17,31 @@ class Implementation(APIBase):
 			test_cases.append(test_case)
 		return test_cases
 
-	def main(self):
+	def form_values(self):
 		test_cases = self.get_all_test_cases()
+		output_html = "<html>"
+		output_html += "<table style='table-layout: fixed;font-size:9px;' border='1'>"
 		for test_case in test_cases:
-			print '--------------------------------------------------\n'
-			print '%s  %s\n' % (test_case['title'],test_case['original_id'])
+			output_html += "<tr>"
+			output_html += "<td style='width:200px;'>TITLE: <b>%s</b><br/><br/></td>" % (test_case['title'])
 			if 'test_steps' in test_case:
+				steps_output = ''
+				steps_expected = ''		
 				for step in test_case['test_steps']:
 					if 'step' in step:
-						print 'STEP: %s\n' % (step['step'])
+						steps_output += "<b>STEP</b>: %s<br/>" % (step['step'])
 					if 'expected_result' in step:
-						print 'EXPECTED: %s\n' % (step['expected_result'])
+						steps_expected += "<b>EXPECTED</b>: %s<br/>" % (step['expected_result'])
+				output_html += "<td style='width:130px;'>%s</td><td style='width:130px;'>%s</td>" % (steps_output, steps_expected)
+			output_html += "</tr>"
+		output_html += "</table>"
+		output_html += "</html>"
+		if os.path.exists("C:/Users/C11904A/Desktop/test.html"):
+			f = file("C:/Users/C11904A/Desktop/test.html", "r+")
+		else:
+			f = file("C:/Users/C11904A/Desktop/test.html", "w")
+		f.write(output_html)
+		f.close()
 
 if __name__=="__main__":
-	Implementation().main()
+	Implementation().form_values()

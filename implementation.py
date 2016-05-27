@@ -23,7 +23,7 @@ class Implementation(APIBase):
 		output_html += "<table style='table-layout: fixed;font-size:9px;' border='1'>"
 		for test_case in test_cases:
 			output_html += "<tr>"
-			output_html += "<td style='width:200px;'>TITLE: <b>%s</b><br/><br/></td>" % (test_case['title'])
+			output_html += "<td style='width:300px;'>TITLE: <b>%s</b><br/><br/></td>" % (test_case['title'])
 			if 'test_steps' in test_case:
 				steps_output = ''
 				steps_expected = ''		
